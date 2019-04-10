@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>change</title>
+    <script type="text/javascript" src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var registered =false;
+            $('#user_name').focusout(function () {
+                var name = $('#user_name').val();
+                if(name==='') {
+                    $('#msg_user').html('请输入用户名!');
+                }else{
+                    $.getJSON('/check/',{'user_name':name},function(result){
+                        if(result===200){
+                            $('#msg_user').html('用户名不存在!')
+                            registered = false;
+                        }else{
+                            $('#msg_user').html('');
+                            registered = true;
+                        }
+                    })
+                }
+            })
+            $('#subm').click(function () {
+                var name = $('#user_name').val();
+                var password = $('#password').val();
+                if(registered && name!=='' && password!==''){
+                    $.getJSON('/changepass/',{'user_name':name,'password':password},function (result) {
+                        if(result['status']===200){
+                            $('#msg_subm').html('恭喜您，密码修改成功！');
+                        }else{
+                            $('#msg_subm').html('很抱歉，密码修改失败！');
+                        }
+
+                    })
+                }
+            })
+        })
+
+    </script>
+</head>
+<body>
+<h3>修改密码</h3>
+<input type="text" name="user_name" id="user_name">
+<label id="msg_user"></label><br>
+<input type="password" name="password" id="password">
+<label id="msg_pw"></label><br><br>
+<button type="button" id="subm">提交</button>
+<label id="msg_subm"></label>
+
+</body>
+</html>

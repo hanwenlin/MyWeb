@@ -1,0 +1,16 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>首页</title>#}
+{#</head>#}
+{#<body>#}
+{#{% include 'nav.html' %}#}
+{#<h4>这是我的第一个模板页面</h4>#}
+{#{% include 'footer.html' %}#}
+{#</body>#}
+{#</html>#}
+
+{% extends 'base.html' %}
+{% block title %}首页{% endblock %}
+{% block content %}<h4 style="color:red;">这是一个内容网站，可以添加很多东西，就是需要这样的</h4>{% endblock %}
